@@ -1,9 +1,9 @@
-<id,nombre,1,1>
-<token_string,adf $a,1,8>
-<token_pyc,1,16>
-<token_double,45.655,3,1>
-<token_mas,3,8>
-<token_integer,34,3,10>
-<expr,3,13>
-<id,apellido,5,1>
->>> Error lexico (linea: 5, posicion: 9)
+sym:  1  stat: 1 w:  i: 1
+sym:  4  stat: 1 w: 1 i: 1
+sym:  3  stat: 1 w: 14 i: 1
+sym:  2  stat: 1 w: 143 i: 1
+sym:  .  stat: 3 w: 1432 i: 1
+<token_integer,1432,1,1>
+sym:  4  stat: 4 w: . i: 5
+sym:  3  stat: 4 w: .4 i: 5
+>>> Error lexico (linea: 1, posicion: 5)

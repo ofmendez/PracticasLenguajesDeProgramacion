@@ -1,0 +1,2 @@
+<token_double,90.00,1,1>
+>>> Error lexico (linea: 1, posicion: 6)

@@ -1,0 +1,2 @@
+<token_integer,1,1,1>
+>>> Error lexico (linea: 1, posicion: 2)

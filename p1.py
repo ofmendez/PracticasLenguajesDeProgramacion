@@ -170,10 +170,10 @@ def delta_opr(actual, symbol):
     
 def delta_num(actual, symbol):
     if (symbol == '.'):
-        return { 1:3, 3:4, 5:6 }.get(actual, 0)
+        return { 1:3, 4:5 }.get(actual, 0)
     if isDigit(symbol):
-        return { 0:1, 1:1, 3:5, 5:5 }.get(actual, 0)
-    return { 1:2, 3:4, 5:6 }.get(actual, 0)
+        return { 0:1, 1:1, 3:4, 4:4 }.get(actual, 0)
+    return { 1:2, 4:5 }.get(actual, 0)
     
 def delta_id(actual, symbol):
     if (isAlphabet(symbol) or symbol == '_'):
@@ -196,7 +196,7 @@ f = open('out.txt', 'w')
 nLine = 0
 mBuffer = []
 
-dfaNumeric   = DFA( range(7) , delta_num , 0 , {2,4,6} )
+dfaNumeric   = DFA( range(6) , delta_num , 0 , {2,3,5} )
 dfaAlphaNum  = DFA( range(3) , delta_id  , 0 , {2} )
 dfaStrings   = DFA( range(4) , delta_str , 0 , {3} )
 dfaOperators = DFA( range(6) , delta_opr , 0 , {5} )
@@ -218,7 +218,6 @@ for line in stdin:
             
         symbolToBuffer = symbol != ' ' and symbol != '"'and symbol != '\n'and symbol != '\r'
         dfaStrings.EvalSymbol(symbol)
-        # print >> f, "sym: ", symbol if symbol != '\n' else '\\n'," stat:", dfaStrings.actual , "w:", ''.join(mBuffer),"i:",iniToken
         if dfaStrings.InAccepting():  ## FIN STRING
             print >> f, "<token_string,{},{},{}>".format(''.join(mBuffer),nLine,iniToken)
             mBuffer = []
@@ -226,13 +225,17 @@ for line in stdin:
         elif (dfaStrings.actual != 1 and dfaStrings.actual != 2 ): ## FUERA DE STRING
             if not PassAlphabet(symbol):
                 pass
+            word = ''.join(mBuffer)
+            lastOperatorState = dfaOperators.actual
+            lastNumericState = dfaNumeric.actual
             dfaNumeric.EvalSymbol(symbol)
             dfaAlphaNum.EvalSymbol(symbol)
             dfaOperators.EvalSymbol(symbol)
-            word = ''.join(mBuffer)
+            
+            print >> f, "sym: ", symbol if symbol != '\n' else '\\n'," stat:", dfaNumeric.actual , "w:", ''.join(mBuffer),"i:",iniToken
             if  dfaAlphaNum.InAccepting():
                 EvalWordToPrnt()
-                if  symbolToBuffer and dfaNumeric.InInit() and dfaOperators.InInit() and symbol not in operators:
+                if  symbolToBuffer and not dfaNumeric.InAccepting() and dfaOperators.InInit() and symbol not in operators:
                     LaunchError(nLine, y)
                 dfaAlphaNum.Reset()
                 mBuffer = []
@@ -240,7 +243,7 @@ for line in stdin:
             elif  dfaNumeric.InAccepting(): 
                 # if  symbolToBuffer and dfaNumeric.InInit() and dfaOperators.InInit() and symbol not in operators:
                 #     LaunchError(nLine, y)
-                nType = "double" if dfaNumeric.actual == 6 else "integer" 
+                nType = "double" if dfaNumeric.actual == 5 else "integer" 
                 print >> f, "<token_{},{},{},{}>".format(nType,word,nLine,iniToken)
                 mBuffer = []
                 iniToken = y
@@ -251,14 +254,25 @@ for line in stdin:
                 mBuffer = []
                 iniToken = y
                 symbolToBuffer = False
-            elif len(word)==1 and word[0] in operators :
-                print >> f, "<{},{},{}>".format(operators[word[0]],nLine,y-1)
-                mBuffer = []
-                iniToken = y
+            elif len(word)==1 :
+                if word[0] in operators :
+                    print >> f, "<{},{},{}>".format(operators[word[0]],nLine,y-1)
+                    mBuffer = []
+                    iniToken = y
+                elif lastOperatorState != dfaOperators.actual :
+                    LaunchError(nLine, y-1)
+                    
             elif symbol == '#': ## SOLO APLICA FUERA DE UN STRING
                 break
-            elif symbolToBuffer:
-                print >> f, 
+            elif len(word) ==2 and symbolToBuffer :
+                if not dfaAlphaNum.InInit() and not isAlphaNumeric(word[0]) and word[0] != '_':
+                    LaunchError(nLine, y-2)
+                elif not dfaNumeric.InInit() and not isDigit(word[0]) :
+                    LaunchError(nLine, y-2)
+                elif lastNumericState != dfaNumeric.actual and  dfaNumeric.InInit() and not isDigit(symbol):
+                    LaunchError(nLine, y-1)
+                    
+            #     print "ERROR JOPUTA!! ",symbol
         else:                 ## LEYENDO DENTRO DE STRING
             if not symbolToBuffer and symbol != '"' :
                 mBuffer.append(symbol )
