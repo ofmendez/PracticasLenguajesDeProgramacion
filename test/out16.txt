@@ -1,0 +1,4 @@
+<token_double,12.43,1,1>
+<token_mas,1,6>
+<token_integer,33,1,7>
+>>> Error lexico (linea: 1, posicion: 9)

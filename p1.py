@@ -7,131 +7,9 @@ def isDigit(symbol):
 def isAlphaNumeric(symbol):
     return isAlphabet(symbol) or isDigit(symbol)
     
-operators = {}
-reserved = {}
-operators["{"] = "token_llave_izq"
-operators["}"] = "token_llave_der"
-operators["$"] = "token_dollar"
-operators[";"] = "token_pyc"
-operators["["] = "token_cor_izq"
-operators["]"] = "token_cor_der"
-operators["("] = "token_par_izq"
-operators[")"] = "token_par_der"
-operators[">"] = "token_mayor"
-operators["<"] = "token_menor"
-operators["!"] = "token_not"
-operators["+"] = "token_mas"
-operators["-"] = "token_menos"
-operators["*"] = "token_mul"
-operators["/"] = "token_div"
-operators["%"] = "token_mod"
-
-operators["eq"] = "token_igual_str"
-operators["ne"] = "token_diff_str"
-
-operators[">="] = "token_mayor_igual"
-operators["<="] = "token_menor_igual"
-operators["=="] = "token_igual_num"
-operators["!="] = "token_diff_num"
-
-operators["&&"] = "token_and"
-operators["||"] = "token_or"
-operators["**"] = "token_pot"
-
-reserved["after"] = "after"
-reserved["append"] = "append"
-reserved["array"] = "array"
-reserved["auto_execok"] = "auto_execok"
-reserved["auto_import"] = "auto_import"
-reserved["auto_load"] = "auto_load"
-reserved["auto_load_index"] = "auto_load_index"
-reserved["auto_qualify"] = "auto_qualify"
-reserved["binary"] = "binary"
-reserved["Bgerror"] = "Bgerror"
-reserved["break"] = "break"
-reserved["catch"] = "catch"
-reserved["cd"] = "cd"
-reserved["Clock"] = "Clock"
-reserved["close"] = "close"
-reserved["concat"] = "concat"
-reserved["continue"] = "continue"
-reserved["Dde"] = "Dde"
-reserved["default"] = "default"
-reserved["else"] = "else"
-reserved["elseif"] = "elseif"
-reserved["Encoding"] = "Encoding"
-reserved["eof"] = "eof"
-reserved["error"] = "error"
-reserved["eval"] = "eval"
-reserved["Exec"] = "Exec"
-reserved["exit"] = "exit"
-reserved["expr"] = "expr"
-reserved["fblocked"] = "fblocked"
-reserved["Fconfigure"] = "Fconfigure"
-reserved["fcopy"] = "fcopy"
-reserved["file"] = "file"
-reserved["fileevent"] = "fileevent"
-reserved["Flush"] = "Flush"
-reserved["for"] = "for"
-reserved["foreach"] = "foreach"
-reserved["format"] = "format"
-reserved["Gets"] = "Gets"
-reserved["glob"] = "glob"
-reserved["global"] = "global"
-reserved["history"] = "history"
-reserved["if"] = "if"
-reserved["info"] = "info"
-reserved["interp"] = "interp"
-reserved["join"] = "join"
-reserved["Lappend"] = "Lappend"
-reserved["lindex"] = "lindex"
-reserved["linsert"] = "linsert"
-reserved["list"] = "list"
-reserved["Llength"] = "Llength"
-reserved["load"] = "load"
-reserved["lrange"] = "lrange"
-reserved["lreplace"] = "lreplace"
-reserved["Lsearch"] = "Lsearch"
-reserved["lsort"] = "lsort"
-reserved["namespace"] = "namespace"
-reserved["open"] = "open"
-reserved["Package"] = "Package"
-reserved["pid"] = "pid"
-reserved["pkg_mkIndex"] = "pkg_mkIndex"
-reserved["proc"] = "proc"
-reserved["puts"] = "puts"
-reserved["pwd"] = "pwd"
-reserved["read"] = "read"
-reserved["regexp"] = "regexp"
-reserved["Regsub"] = "Regsub"
-reserved["rename"] = "rename"
-reserved["resource"] = "resource"
-reserved["return"] = "return"
-reserved["Scan"] = "Scan"
-reserved["seek"] = "seek"
-reserved["set"] = "set"
-reserved["socket"] = "socket"
-reserved["Source"] = "Source"
-reserved["split"] = "split"
-reserved["string"] = "string"
-reserved["subst"] = "subst"
-reserved["switch"] = "switch"
-reserved["tclLog"] = "tclLog"
-reserved["tell"] = "tell"
-reserved["time"] = "time"
-reserved["Trace"] = "Trace"
-reserved["unknown"] = "unknown"
-reserved["unset"] = "unset"
-reserved["update"] = "update"
-reserved["Uplevel"] = "Uplevel"
-reserved["upvar"] = "upvar"
+operators = { "{" :"token_llave_izq", "}" :"token_llave_der", "$" :"token_dollar", ";" :"token_pyc", "[" :"token_cor_izq", "]" :"token_cor_der", "(" :"token_par_izq", ")" :"token_par_der", ">" :"token_mayor", "<" :"token_menor", "!" :"token_not", "+" :"token_mas", "-" :"token_menos", "*" :"token_mul", "/" :"token_div", "%" :"token_mod", "eq" :"token_igual_str", "ne" :"token_diff_str", ">=" :"token_mayor_igual", "<=" :"token_menor_igual", "==" :"token_igual_num", "!=" :"token_diff_num", "&&" :"token_and", "||" :"token_or", "**" :"token_pot"}
+reserved =  {"after":"after"  , "append":"append"  , "array":"array"  , "auto_execok":"auto_execok"  , "auto_import":"auto_import"  , "auto_load":"auto_load"  , "auto_load_index":"auto_load_index"  , "auto_qualify":"auto_qualify"  , "binary":"binary"  , "Bgerror":"Bgerror"  , "break":"break"  , "catch":"catch"  , "cd":"cd"  , "Clock":"Clock"  , "close":"close"  , "concat":"concat"  , "continue":"continue"  , "Dde":"Dde"  , "default":"default"  , "else":"else"  , "elseif":"elseif"  , "Encoding":"Encoding"  , "eof":"eof"  , "error":"error"  , "eval":"eval"  , "Exec":"Exec"  , "exit":"exit"  , "expr":"expr"  , "fblocked":"fblocked"  , "Fconfigure":"Fconfigure"  , "fcopy":"fcopy"  , "file":"file"  , "fileevent":"fileevent"  , "Flush":"Flush"  , "for":"for"  , "foreach":"foreach"  , "format":"format"  , "Gets":"Gets"  , "glob":"glob"  , "global":"global"  , "history":"history"  , "if":"if"  , "info":"info"  , "interp":"interp"  , "join":"join"  , "Lappend":"Lappend"  , "lindex":"lindex"  , "linsert":"linsert"  , "list":"list"  , "Llength":"Llength"  , "load":"load"  , "lrange":"lrange"  , "lreplace":"lreplace"  , "Lsearch":"Lsearch"  , "lsort":"lsort"  , "namespace":"namespace"  , "open":"open"  , "Package":"Package"  , "pid":"pid"  , "pkg_mkIndex":"pkg_mkIndex"  , "proc":"proc"  , "puts":"puts"  , "pwd":"pwd"  , "read":"read"  , "regexp":"regexp"  , "Regsub":"Regsub"  , "rename":"rename"  , "resource":"resource"  , "return":"return"  , "Scan":"Scan"  , "seek":"seek"  , "set":"set"  , "socket":"socket"  , "Source":"Source"  , "split":"split"  , "string":"string"  , "subst":"subst"  , "switch":"switch"  , "tclLog":"tclLog"  , "tell":"tell"  , "time":"time"  , "Trace":"Trace"  , "unknown":"unknown"  , "unset":"unset"  , "update":"update"  , "Uplevel":"Uplevel"  , "upvar":"upvar"  , "vwait":"vwait"  , "while":"while"  , "exists":"exists"  , "then":"then"  }
 # reserved["variable"] = "variable" ???
-reserved["vwait"] = "vwait"
-reserved["while"] = "while"
-reserved["exists"] ="exists"
-reserved["then"] ="then"
-
-
 
 class DFA:
     def __init__(self, states, delta, initial, finals):
@@ -149,7 +27,6 @@ class DFA:
     def InInit(self):
         return self.actual == self.initial
         
-
 def delta_str(actual, symbol):
     if (symbol == '"'):
         return { 0:1, 1:2, 2:3, 3:1 }.get(actual, 0)
@@ -191,35 +68,36 @@ def PassAlphabet(symbol):
 def LaunchError(a,b):
     print >> f, ">>> Error lexico (linea: {}, posicion: {})".format(a, b )
     exit()
+def MustSaveStrInit(strInit, symbol):
+    return strInit and symbol == '"'
 #************************MAIN*******************
 f = open('out.txt', 'w')
 nLine = 0
 mBuffer = []
+strPos =[1,1]
 
-dfaNumeric   = DFA( range(6) , delta_num , 0 , {2,3,5} )
+dfaNumeric   = DFA( range(6) , delta_num , 0 , {2,5} )
 dfaAlphaNum  = DFA( range(3) , delta_id  , 0 , {2} )
 dfaStrings   = DFA( range(4) , delta_str , 0 , {3} )
 dfaOperators = DFA( range(6) , delta_opr , 0 , {5} )
 
 for line in stdin: 
     nLine += 1
-    iniToken =1
+    iniToken =1 
     dfaNumeric.Reset()
     dfaAlphaNum.Reset()
     y = 0 
-    while y <= len(line):
-        if y < len(line):
-            symbol = line[y]
-        elif line[-1] != '\n': 
-            symbol = '\n'
-        else :
-            break
+    lenLine = len(line) if  line[-1] == '\n' else len(line)+1
+    while y < lenLine:
+        symbol = '\n' if y == len(line) else line[y]
         y += 1
             
         symbolToBuffer = symbol != ' ' and symbol != '"'and symbol != '\n'and symbol != '\r'
+        strPos = [nLine,y] if MustSaveStrInit( dfaStrings.InInit(), symbol) else strPos
         dfaStrings.EvalSymbol(symbol)
+        
         if dfaStrings.InAccepting():  ## FIN STRING
-            print >> f, "<token_string,{},{},{}>".format(''.join(mBuffer),nLine,iniToken)
+            print >> f, "<token_string,{},{},{}>".format(''.join(mBuffer),strPos[0],strPos[1])
             mBuffer = []
             iniToken = y+1
         elif (dfaStrings.actual != 1 and dfaStrings.actual != 2 ): ## FUERA DE STRING
@@ -231,8 +109,7 @@ for line in stdin:
             dfaNumeric.EvalSymbol(symbol)
             dfaAlphaNum.EvalSymbol(symbol)
             dfaOperators.EvalSymbol(symbol)
-            
-            print >> f, "sym: ", symbol if symbol != '\n' else '\\n'," stat:", dfaNumeric.actual , "w:", ''.join(mBuffer),"i:",iniToken
+            # print >> f, "sym: ", symbol if symbol != '\n' else '\\n'," stat:", dfaNumeric.actual , "w:", ''.join(mBuffer),"i:",iniToken
             if  dfaAlphaNum.InAccepting():
                 EvalWordToPrnt()
                 if  symbolToBuffer and not dfaNumeric.InAccepting() and dfaOperators.InInit() and symbol not in operators:
@@ -241,15 +118,11 @@ for line in stdin:
                 mBuffer = []
                 iniToken = y
             elif  dfaNumeric.InAccepting(): 
-                # if  symbolToBuffer and dfaNumeric.InInit() and dfaOperators.InInit() and symbol not in operators:
-                #     LaunchError(nLine, y)
                 nType = "double" if dfaNumeric.actual == 5 else "integer" 
                 print >> f, "<token_{},{},{},{}>".format(nType,word,nLine,iniToken)
                 mBuffer = []
                 iniToken = y
             elif dfaOperators.InAccepting():
-                # if  symbolToBuffer and dfaNumeric.InInit() and dfaOperators.InInit() and symbol not in operators:
-                #     LaunchError(nLine, y)
                 print >> f, "<{},{},{}>".format(operators[word+symbol],nLine,iniToken)
                 mBuffer = []
                 iniToken = y
@@ -264,66 +137,19 @@ for line in stdin:
                     
             elif symbol == '#': ## SOLO APLICA FUERA DE UN STRING
                 break
-            elif len(word) ==2 and symbolToBuffer :
-                if not dfaAlphaNum.InInit() and not isAlphaNumeric(word[0]) and word[0] != '_':
+            elif len(word) >0  and symbolToBuffer :
+                if (not dfaAlphaNum.InInit() and not isAlphaNumeric(word[0]) and word[0] != '_') or ( not dfaNumeric.InInit() and not isDigit(word[0]) and dfaAlphaNum.InInit() ):
                     LaunchError(nLine, y-2)
-                elif not dfaNumeric.InInit() and not isDigit(word[0]) :
-                    LaunchError(nLine, y-2)
-                elif lastNumericState != dfaNumeric.actual and  dfaNumeric.InInit() and not isDigit(symbol):
+                elif lastNumericState != dfaNumeric.actual and  dfaNumeric.InInit() and not isDigit(symbol) and dfaAlphaNum.InInit():
+                    print >> f, "<token_integer,{},{},{}>".format(word[:-1],nLine,iniToken)
                     LaunchError(nLine, y-1)
-                    
-            #     print "ERROR JOPUTA!! ",symbol
-        else:                 ## LEYENDO DENTRO DE STRING
-            if not symbolToBuffer and symbol != '"' :
-                mBuffer.append(symbol )
+        elif not symbolToBuffer and symbol != '"' and (symbol != '\n'and symbol != '\r') : ## LEYENDO DENTRO DE STRING
+            mBuffer.append(symbol )
                         
         if symbolToBuffer  :
             mBuffer.append(symbol )
         elif dfaStrings.InInit() :
             iniToken +=1
-        
-if  not dfaStrings.InAccepting():
-    pass # PRNT ERROR
-
+# if  not dfaStrings.InAccepting(): pass # PRNT ERROR
 f.close()
-            
-
-
-
-
-# print >> f, ("es: ", reserved ["while"])
-# print >> f, ("es: ", operators["$"])
-# for i in range(7):
-#     for j in range(10):
-#         print >> f, ("es: ",i, j, delta_num(i, str(j) ))
-#     print >> f, ("punto: ",delta_num(i, '.'))
-#     print >> f, ("otro: ",delta_num(i, '%'))
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
