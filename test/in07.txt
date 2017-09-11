@@ -1,0 +1,4 @@
+if { "cadena" } then {
+    puts [set x expr {1 + 2} ]; 
+    # ignorar comentario
+}

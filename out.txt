@@ -1,0 +1,9 @@
+<id,nombre,1,1>
+<token_string,adf $a,1,8>
+<token_pyc,1,16>
+<token_double,45.655,3,1>
+<token_mas,3,8>
+<token_integer,34,3,10>
+<expr,3,13>
+<id,apellido,5,1>
+>>> Error lexico (linea: 5, posicion: 9)
