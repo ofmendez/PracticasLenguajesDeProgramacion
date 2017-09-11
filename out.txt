@@ -1,1 +1,1 @@
-<token_string,adasdadasd asdasd,2,3>
+>>> Error lexico (linea: 2, posicion: 3)
