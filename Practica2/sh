@@ -1,0 +1,4 @@
+#!/bin/bash
+
+python p2.py < g_test
+# cat out.txt

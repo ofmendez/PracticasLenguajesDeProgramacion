@@ -1,0 +1,13 @@
+ S => A uno B C S_PRIM
+ S_PRIM => dos S_PRIM
+ S_PRIM => epsilon
+ A => B C D A_PRIM
+ A => epsilon
+ A_PRIM => tres A_PRIM
+ A_PRIM => epsilon
+ B => D cuatro C tres
+ B => epsilon
+ C => cinco D B
+ C => epsilon
+ D => seis
+ D => epsilon
