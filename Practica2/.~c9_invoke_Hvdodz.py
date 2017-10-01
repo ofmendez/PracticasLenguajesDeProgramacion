@@ -67,7 +67,7 @@ def calc_SIGUIENTES(KEY):
         list_SIGUIENTES.append("eof")
     for NTER in gramatica.keys():
         for derivacion in gramatica[NTER]:
-           list_SIGUIENTES.extend( ret_SIGUIENTES(derivacion, KEY, NTER) )
+           list_SIGUIENTES.extend( ret_SIGUIENTES(derivacion, KEY) )
         
     
     
@@ -76,44 +76,11 @@ def calc_SIGUIENTES(KEY):
     return list_SIGUIENTES
     
 
-def ret_SIGUIENTES(derivacion, KEY, NTER):
+def ret_SIGUIENTES(derivacion, KEY):
     res_SIGUIENTES = []
-    
+    for
     if KEY in derivacion:
-        for i in range(derivacion):
-            if derivacion[i] == KEY 
-                if i < (len(derivacion) - 1):
-                    FLAG = False
-                    incr = 1
-                    
-                    if isTerminal(derivacion[i + incr]):
-                        res_SIGUIENTES.append(derivacion[i + incr])
-                        break
-                    
-                    aux = PRIMEROS[ derivacion[i + incr] ]
-                    
-                    while "epsilon" in aux and (i + incr) <= len(derivacion):
-                        if  (i + incr) == len(derivacion):
-                            res_SIGUIENTES.extend( calc_SIGUIENTES (NTER) )
-                            FLAG = True
-                            break
-                            
-                        aux.remove("epsilon")
-                        res_SIGUIENTES.extend(aux)
-                        incr += 1
-                        
-                        if isTerminal(derivacion[i + incr]):
-                            res_SIGUIENTES.append(derivacion[i + incr])
-                            FLAG = True
-                            break
-                        aux = PRIMEROS[ derivacion[i + incr] ]
-                        
-                    if FLAG:
-                        break   
-
-                else : # KEY en ultima posicion
-                    res_SIGUIENTES.extend( calc_SIGUIENTES (NTER) )
-                
+        
     
     res_SIGUIENTES = set(res_SIGUIENTES)
     res_SIGUIENTES = list(res_SIGUIENTES)
@@ -129,7 +96,7 @@ def ret_PRIMEROS(derivacion):
         res_PRIMEROS.append(derivacion[0])
         
     if not isTerminal(derivacion[0]):
-        aux = calc_PRIMEROS(derivacion[0])
+    
         
         if len(derivacion) == 1 and aux[0] == "epsilon":
             res_PRIMEROS.append( "epsilon" )

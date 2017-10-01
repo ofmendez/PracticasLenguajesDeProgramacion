@@ -1,4 +1,5 @@
 #!/bin/bash
 
-python p2.py < g_test
+# python p2.py < g_test
+python p2.py < Gramatica
 # cat out.txt
