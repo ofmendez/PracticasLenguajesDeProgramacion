@@ -1,6 +1,7 @@
-A => B
-A => pepito 
-A => C
-B => C
-B => casa
-C => hola
+E => integer
+EXPRESION => E OP_BINARIO EXPRESION
+EXPRESION => E
+EXPRESION => OP_UNARIO EXPRESION 
+EXPRESION => ( EXPRESION )
+OP_BINARIO => * 
+OP_UNARIO => + 

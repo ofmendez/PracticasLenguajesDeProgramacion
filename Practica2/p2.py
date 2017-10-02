@@ -63,16 +63,17 @@ def calc_PRIMEROS(KEY):
 
 def calc_SIGUIENTES(KEY):
     list_SIGUIENTES = []
-    if KEY == "S"
+    if KEY == "S":
         list_SIGUIENTES.append("eof")
     for NTER in gramatica.keys():
         for derivacion in gramatica[NTER]:
            list_SIGUIENTES.extend( ret_SIGUIENTES(derivacion, KEY, NTER) )
-        
     
     
     list_SIGUIENTES = set(list_SIGUIENTES)
     list_SIGUIENTES = list(list_SIGUIENTES)
+    if "epsilon" in list_SIGUIENTES:
+        list_SIGUIENTES.remove("epsilon")
     return list_SIGUIENTES
     
 
@@ -80,8 +81,9 @@ def ret_SIGUIENTES(derivacion, KEY, NTER):
     res_SIGUIENTES = []
     
     if KEY in derivacion:
-        for i in range(derivacion):
-            if derivacion[i] == KEY 
+        # print ">>>> NTR: ", NTER," - " , "K:", KEY, derivacion
+        for i in range(len (derivacion)):
+            if derivacion[i] == KEY :
                 if i < (len(derivacion) - 1):
                     FLAG = False
                     incr = 1
@@ -90,11 +92,13 @@ def ret_SIGUIENTES(derivacion, KEY, NTER):
                         res_SIGUIENTES.append(derivacion[i + incr])
                         break
                     
-                    aux = PRIMEROS[ derivacion[i + incr] ]
+                    aux = PRIMEROS[ derivacion[i + incr] ][:]
                     
-                    while "epsilon" in aux and (i + incr) <= len(derivacion):
-                        if  (i + incr) == len(derivacion):
-                            res_SIGUIENTES.extend( calc_SIGUIENTES (NTER) )
+                    while "epsilon" in aux and (i + incr) < len(derivacion):
+                        if  (i + incr) == len(derivacion)-1:
+                            if KEY != NTER :
+                                res_SIGUIENTES.extend( calc_SIGUIENTES (NTER) )
+                                # res_SIGUIENTES.append( " aSIG({} )".format(NTER) )
                             FLAG = True
                             break
                             
@@ -102,22 +106,28 @@ def ret_SIGUIENTES(derivacion, KEY, NTER):
                         res_SIGUIENTES.extend(aux)
                         incr += 1
                         
-                        if isTerminal(derivacion[i + incr]):
+                        if isTerminal(derivacion[i + incr]) :
                             res_SIGUIENTES.append(derivacion[i + incr])
                             FLAG = True
                             break
-                        aux = PRIMEROS[ derivacion[i + incr] ]
                         
+                        aux = PRIMEROS[ derivacion[i + incr] ][:]
+                        
+                        
+                    res_SIGUIENTES.extend(aux)
                     if FLAG:
                         break   
 
                 else : # KEY en ultima posicion
-                    res_SIGUIENTES.extend( calc_SIGUIENTES (NTER) )
+                    if KEY != NTER :
+                        res_SIGUIENTES.extend( calc_SIGUIENTES (NTER) )
+                        # res_SIGUIENTES.append( " bSIG({})".format(NTER) )
                 
     
     res_SIGUIENTES = set(res_SIGUIENTES)
     res_SIGUIENTES = list(res_SIGUIENTES)
 
+   
     return res_SIGUIENTES
     
 
@@ -150,20 +160,73 @@ def ret_PRIMEROS(derivacion):
             else:
                 break
             
-    res_PRIMEROS = set(res_PRIMEROS)
-    res_PRIMEROS = list(res_PRIMEROS)
-
     return res_PRIMEROS
         
 
+
+            
+            
+def prediccion(derivacion, KEY):
+    
+    list_prediccion = []
+    if len(derivacion)  == 1 and derivacion[0] == "epsilon":
+        list_prediccion.extend(SIGUIENTES[KEY])
+    else:
+        for word in derivacion:
+            if isTerminal(word):
+                list_prediccion.append(word) 
+                break
+            else:
+                # print "DEBE SER NO TERMINAL: ",word, derivacion
+                if "epsilon" in PRIMEROS[word]:
+                    list_prediccion.extend(PRIMEROS[word]) 
+                    list_prediccion.extend(SIGUIENTES[KEY]) 
+                else:
+                    list_prediccion.extend(PRIMEROS[word]) 
+                    break
+            
+    
+    list_prediccion = set(list_prediccion)
+    list_prediccion = list(list_prediccion)
+
+    if "epsilon" in list_prediccion:
+        list_prediccion.remove("epsilon")
+    
+    return list_prediccion
+        
+
+def calc_PREDICCION(KEY):
+    lista_prediccion = []
+    for derivacion in gramatica[KEY]:
+        lista_prediccion.append( prediccion(derivacion, KEY) )
+        
+    return lista_prediccion
+
 PRIMEROS = {}
 SIGUIENTES = {}
+PREDICCION = {}
+
 for KEY in gramatica.keys():
     PRIMEROS[KEY] = calc_PRIMEROS(KEY)
+for KEY in gramatica.keys():
     SIGUIENTES[KEY] = calc_SIGUIENTES(KEY)
     
-pp(PRIMEROS)
+for KEY in gramatica.keys():
+    PREDICCION[KEY] = calc_PREDICCION(KEY)
 
+
+print "token = Translate( lexico.pop(0) ) "
+print "S()"
+print "if ( token != \"eof\" ):"
+
+
+
+# print "  -PRIMEROS - " 
+# pp(PRIMEROS)
+# print "  -SIGUIENTES - " 
+# pp(SIGUIENTES)
+# print "  -PREDICCION - " 
+# pp(PREDICCION)
 
 
 # PRIM A =  perro ant cow daniel 
